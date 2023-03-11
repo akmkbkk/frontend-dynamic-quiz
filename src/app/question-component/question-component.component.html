@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="jumbotron jumbotron-fluid">
+    <div *ngFor="let a of questionsJson; let index = index" class="container">
+      <div *ngIf="index===currentQuestionIndex">
+      <h2 class="display-4">Question {{index+1}}/{{questionsJson.length}}</h2>
+      <fieldset class="form-group">
+        <legend class="mt-4">{{a.question}} ({{a.marks}} marks) <button (click)="onClickSkip()" class="btn btn-outline-primary m-1 float-end">Skip</button></legend>
+        <div *ngFor="let q of a.answers" class="form-check">
+          <input class="form-check-input" type="radio" name="answerRadio" id="answerOption" (click)="onRadioClick(q.optionKey)" value="{{q.optionKey}}">
+          <label class="form-check-label" for="optionsRadios1">
+            {{q.optionVal}}
+          </label>
+        </div>
+      </fieldset>
+      <button *ngIf="currentQuestionIndex<questionsJson.length" class="btn btn-primary m-1" (click)="onClickNext(index)">Next</button>
+    </div>
+  </div>
+  </div>
+  <br>
+  <div>
+    <div *ngIf="revealScore">
+    <h2>Your Score is {{totalScore}}/{{maxScore}}</h2><button [routerLink]="[ '/']" class="btn btn-outline-primary m-1 float-end">Home</button><br>
+    <div>
+      <table class="table table-hover">
+        <thead>
+          <tr>  
+            <th scope="col">Questions
+            </th>
+            <th scope="col">Correct Answers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let a of questionsJson; let index = index">
+            <td scope="row">
+              <b>{{a.question}} </b><br>
+              <div *ngFor="let ans of a.answers">
+                <small>{{ans.optionKey}}. {{ans.optionVal}}</small>
+              </div>
+            
+            
+            </td>
+            <td>{{a.correctOptionKey}} - {{a.correctAnsExplain}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+    <span *ngIf="currentQuestionIndex===questionsJson.length && !revealScore">You have reached the end of the test! Please click submit to see results</span>
+    <button *ngIf="!revealScore" class="btn btn-primary m-1 float-end" (click)="onClickSubmit()">Submit Test</button>
+  </div>
+  
+  </div>
+  
+  <!--
+  <p>total score - {{totalScore}} && current question index - {{currentQuestionIndex}}</p>
+  -->
