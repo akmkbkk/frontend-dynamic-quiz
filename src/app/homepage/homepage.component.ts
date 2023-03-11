@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-homepage',
@@ -9,22 +10,27 @@ import { Router} from '@angular/router';
 export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
+
+    this.dataService.sendIndexRequest("getIndex").subscribe((data) => {
+      var jsonData = JSON.stringify(data);
+      var jsonArr = JSON.parse(jsonData);
+      this.fileJson = jsonArr;
+      console.log(this.fileJson)
+    });
+
   }
 
-  constructor(private _router: Router){
+  fileJson;
 
+  constructor(private _router: Router,private dataService: DataService){
+    this.fileJson = [{
+      testName:"Loading...",
+      fileName:"Loading...",
+      totalMarks:"Loading...",
+      testDesc:"Loading..."
+    }]
   }
 
-  fileJson = [{
-    testName:"Countries And their Capitals",
-    fileName:"Countries_And_their_Capitals",
-    totalMarks:"50",
-    testDesc:"Countries and their capital questions"
-  },{
-    testName:"States and their Capitals",
-    fileName:"States_and_their_Capitals",
-    totalMarks:"50",
-    testDesc:"States and their Capitals questions"
-  }]
+
 
 }

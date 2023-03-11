@@ -33,4 +33,9 @@ export class DataService {
       this.slash+
       fileToLoad).pipe(catchError(this.handleError));
   }
+
+  public sendIndexRequest(endPoint:string){
+    return this.httpClient.get(this.REST_API_SERVER+
+      endPoint).pipe(catchError(this.handleError));
+  }
 }
