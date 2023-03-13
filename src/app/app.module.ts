@@ -9,10 +9,12 @@ import { HeaderComponent } from './header/header.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { SheetMakerComponent } from './sheet-maker/sheet-maker.component';
 
 const appRoutes: Routes = [
   { path: 'questions/:p1', component: QuestionComponentComponent },
-  { path: '', component: HomepageComponent }
+  { path: '', component: HomepageComponent },
+  { path: 'sheetadmin', component: SheetMakerComponent }
 ];
 
 @NgModule({
@@ -20,7 +22,8 @@ const appRoutes: Routes = [
     AppComponent,
     QuestionComponentComponent,
     HeaderComponent,
-    HomepageComponent
+    HomepageComponent,
+    SheetMakerComponent
   ],
   imports: [
     BrowserModule,

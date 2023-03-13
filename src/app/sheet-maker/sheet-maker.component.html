@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label class="form-label mt-4" for="exampleTextarea">Question Text</label>
+                <textarea #questionArea (focusout)="onFocusOutQuestionArea(questionArea.value)" class="form-control" id="exampleTextarea" rows="3">{{questionJson.question}}</textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label mt-4" for="exampleTextarea">Options <button (click)="onClickAddRow()">add row</button></label>
+                <table class="table table-hover">
+                    <tbody>
+                      <tr *ngFor="let option of optionsJson; let index = index" class="table-active">
+                        <th scope="row">{{option.optionKey}}</th>
+                        <td><input #optionInput name="optionInput" class="form-control form-control-sm" type="text" placeholder="Option Text" (focusout)="onFocusOut(index,optionInput.value)" value={{option.optionVal}} id="inputSmall"></td>
+                        <td>Column content</td>
+                        <td><button type="button" (click)="onClickRemove(index)" class="btn btn-primary btn-sm">remove</button></td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+
+ 
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label mt-4" for="inputDefault">Marks</label>
+                        <input #marksInput name="marksInput" (focusout)="onFocusOutMarks(marksInput.value)" type="text" class="form-control" placeholder="Marks" id="inputDefault">
+                      </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label mt-4" for="exampleSelect1">Correct Option</label>
+                        <select #optionInput name="optionInput" (focusout)="onCorrectOptionFocusOut(optionInput.value)" class="form-select" id="exampleSelect1">
+                            <option value="">Select</option>
+                            <option *ngFor="let option of optionsJson">{{option.optionKey}}</option>
+                        </select>
+                      </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label mt-4" for="exampleTextarea">Correct Answer explanation</label>
+                <textarea #explainInput name="explainInput" (focusout)="onFocusOutExplain(explainInput.value)" class="form-control" id="exampleTextarea" rows="2"></textarea>
+            </div>
+            <br>
+            <button [disabled]="addButtonDisabled" (click)="onClickAddQuestion()" type="submit" class="btn btn-primary">Add</button>&nbsp;<button (click)="onClickReset();questionArea.value='';marksInput.value='';explainInput.value='' " type="submit" class="btn btn-warning">Reset</button>
+            &nbsp;<span style="color:red;" *ngIf="errorMessage!=''" span>{{errorMessage}}</span>
+            
+            
+        </div>
+        <div class="col-md-7">
+            <div class="form-group">
+                <label class="form-label mt-4">Question as JSON</label>
+                <textarea style="font-family: Lucida Console;font-size:small"class="form-control" rows="15">{{questionJson | json}}</textarea>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label class="form-label mt-4">Output Text (use CTRL+V to copy the selected content) 
+                    <button (click)="onClickStartOver();questionArea.value='';marksInput.value='';explainInput.value='' ">start over</button></label>
+                <textarea #finaloutput name="finaloutput" (focusin)="finaloutput.select()" style="font-family: Lucida Console;font-size:small"class="form-control" rows="25">{{questionsArray | json}}</textarea>
+            </div>
+        </div>
+        
+    </div>
+</div>

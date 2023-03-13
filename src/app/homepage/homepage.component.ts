@@ -15,12 +15,16 @@ export class HomepageComponent implements OnInit {
       var jsonData = JSON.stringify(data);
       var jsonArr = JSON.parse(jsonData);
       this.fileJson = jsonArr;
+      if(this.fileJson.length === 0){
+        this.errorMessage = "No Questions found yet. Please add to the Catalogue File.";
+      }
       console.log(this.fileJson)
     });
 
   }
 
   fileJson;
+  errorMessage;
 
   constructor(private _router: Router,private dataService: DataService){
     this.fileJson = [{
@@ -29,6 +33,8 @@ export class HomepageComponent implements OnInit {
       totalMarks:"Loading...",
       testDesc:"Loading..."
     }]
+
+    this.errorMessage = "";
   }
 
 
