@@ -13,8 +13,11 @@ export class SheetMakerComponent implements OnInit {
   optionsKeyMap:Map<number,string>;
   addButtonDisabled:boolean;
   errorMessage:string;
+  componentMsg:string;
 
   constructor() { 
+
+    this.componentMsg = "Sheet Maker";
 
     this.addButtonDisabled = true;
 
