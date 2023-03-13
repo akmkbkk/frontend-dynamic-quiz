@@ -10,6 +10,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { SheetMakerComponent } from './sheet-maker/sheet-maker.component';
+import { PrettycolorjsonPipe } from './prettycolorjson.pipe';
 
 const appRoutes: Routes = [
   { path: 'questions/:p1', component: QuestionComponentComponent },
@@ -23,7 +24,8 @@ const appRoutes: Routes = [
     QuestionComponentComponent,
     HeaderComponent,
     HomepageComponent,
-    SheetMakerComponent
+    SheetMakerComponent,
+    PrettycolorjsonPipe
   ],
   imports: [
     BrowserModule,

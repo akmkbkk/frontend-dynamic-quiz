@@ -90,7 +90,6 @@ export class SheetMakerComponent implements OnInit {
   getOptionKeyFromIndex(index:number):string{
     let result = this.optionsKeyMap.get(index);
     return result??"A";
-    this.checkConditions();
   }
 
   onFocusOut(index:number,value:string){
