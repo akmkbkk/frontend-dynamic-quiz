@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class SheetMakerComponent implements OnInit {
 
   questionJson:any;
+  changedAttribute:string;
   questionsArray:any[];
   optionsJson:any[];
   optionsKeyMap:Map<number,string>;
@@ -16,6 +17,8 @@ export class SheetMakerComponent implements OnInit {
   componentMsg:string;
 
   constructor() { 
+
+    
 
     this.componentMsg = "Sheet Maker";
 
@@ -47,6 +50,8 @@ export class SheetMakerComponent implements OnInit {
       [4,"E"]
     ]
     );
+
+    this.changedAttribute="";
   }
 
   ngOnInit(): void {
@@ -75,10 +80,14 @@ export class SheetMakerComponent implements OnInit {
   }
 
   onClickAddRow(){
-    this.optionsJson.push({
-      optionKey:this.getOptionKeyFromIndex(this.optionsJson.length),
-      optionVal:""
-    })
+    if(this.optionsJson.length<= 3){
+      this.optionsJson.push({
+        optionKey:this.getOptionKeyFromIndex(this.optionsJson.length),
+        optionVal:""
+      })
+    }
+
+    this.changedAttribute="optionsJson";
     this.checkConditions();
   }
 
@@ -105,34 +114,38 @@ export class SheetMakerComponent implements OnInit {
   onFocusOutQuestionArea(value:string){
     this.questionJson.question = value;
     this.checkConditions();
+    this.changedAttribute="question";
   }
 
   onFocusOutMarks(value:string){
     this.questionJson.marks = value;
     this.checkConditions();
+    this.changedAttribute="marks";
   }
 
   onFocusOutExplain(value:string){
     this.questionJson.correctAnsExplain = value;
     this.checkConditions();
+    this.changedAttribute="correctAnsExplain";
   }
 
   onCorrectOptionFocusOut(value:string){
     this.questionJson.correctOptionKey = value;
     this.checkConditions();
+    this.changedAttribute="correctOptionKey";
   }
 
   onClickReset(){
+    this.optionsJson = [];
     this.questionJson = {
       question:"",
-      answers:[],
+      answers:this.optionsJson,
       correctOptionKey:"",
       correctAnsExplain:"",
       marks:""
     };
-
-    this.optionsJson = [];
     this.checkConditions();
+    this.changedAttribute="";
   }
 
   onClickAddQuestion(){
@@ -144,9 +157,20 @@ export class SheetMakerComponent implements OnInit {
 
   onClickStartOver(){
     this.questionsArray = [];
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     this.onClickReset()
   }
 
-  
+  onClickSaveFile(downloadFileName:string){
+    let element:HTMLElement;
+    element = document.createElement('a');
+    const fileType = 'text/json';
+    element.setAttribute('href',`data:${fileType};charset=utf-8,${encodeURIComponent(JSON.stringify(this.questionsArray,null,2))}`);
+    element.setAttribute('download', downloadFileName.split(".")[0]+".json");
+    var event = new MouseEvent("click");
+    element.dispatchEvent(event);
+
+  }
 
 }
