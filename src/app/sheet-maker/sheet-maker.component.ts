@@ -15,6 +15,7 @@ export class SheetMakerComponent implements OnInit {
   addButtonDisabled:boolean;
   errorMessage:string;
   componentMsg:string;
+  downloadFileLengthOkay:boolean;
 
   constructor() { 
 
@@ -52,6 +53,7 @@ export class SheetMakerComponent implements OnInit {
     );
 
     this.changedAttribute="";
+    this.downloadFileLengthOkay = false;
   }
 
   ngOnInit(): void {
@@ -145,6 +147,7 @@ export class SheetMakerComponent implements OnInit {
       marks:""
     };
     this.checkConditions();
+    this.downloadFileLengthOkay = false;
     this.changedAttribute="";
   }
 
@@ -171,6 +174,12 @@ export class SheetMakerComponent implements OnInit {
     var event = new MouseEvent("click");
     element.dispatchEvent(event);
 
+  }
+
+  onInputDownloadFileName(downloadFileName:string){
+    if(downloadFileName.length>4){
+      this.downloadFileLengthOkay = true;
+    }
   }
 
 }

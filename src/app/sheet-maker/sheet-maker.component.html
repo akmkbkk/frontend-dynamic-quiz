@@ -78,8 +78,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="input-group mb-3">
-                            <input #downloadFile name="downloadFile" type="text" class="form-control" placeholder="file name to save the JSON with" aria-label="Save file name" aria-describedby="button-addon2">
-                            <button (click)="onClickSaveFile(downloadFile.value);questionArea.value='';marksInput.value='';explainInput.value='';downloadFile.value='' " [disabled]="questionsArray.length==0" class="btn btn-success btn-lg" type="button" id="button-addon2">Download</button>
+                            <input (keyup)="onInputDownloadFileName(downloadFile.value)" #downloadFile name="downloadFile" type="text" class="form-control" placeholder="file name to save the JSON with" aria-label="Save file name" aria-describedby="button-addon2">
+                            <button  (click)="onClickSaveFile(downloadFile.value);questionArea.value='';marksInput.value='';explainInput.value='';downloadFile.value='' " [disabled]="questionsArray.length==0 || !downloadFileLengthOkay" class="btn btn-success btn-lg" type="button" id="button-addon2">Download</button>
                           </div>
                         
                     </div>
