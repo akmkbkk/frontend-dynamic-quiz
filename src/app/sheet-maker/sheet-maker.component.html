@@ -28,7 +28,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="form-label mt-4" for="inputDefault">Marks for this question</label>
-                        <input #marksInput name="marksInput" (focusout)="onFocusOutMarks(marksInput.value)" type="text" class="form-control" placeholder="Marks" id="inputDefault">
+                        <input #marksInput name="marksInput" (focusout)="onFocusOutMarks(marksInput.value)" type="number" class="form-control" placeholder="Marks" id="inputDefault">
                       </div>
                 </div>
                 <div class="col-md-6">
@@ -54,9 +54,9 @@
         <div class="col-md-7">
             <div class="form-group">
                 <label class="form-label mt-4">Question as JSON</label>
-                <div class="card bg-light mb-3" style="max-width: 50rem;height:30rem;">
+                <div class="card bg-light mb-3" style="max-width: 50rem;height:33rem;">
                     <div class="card-body">
-                      <pre class="card-text">{{questionJson | json}}</pre>
+                      <pre style="font-size:small;font-family: 'Courier New', Courier, monospace" class="card-text">{{questionJson | json}}</pre>
                     </div>
                   </div>
                   <!--

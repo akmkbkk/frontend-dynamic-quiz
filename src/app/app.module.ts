@@ -11,12 +11,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { SheetMakerComponent } from './sheet-maker/sheet-maker.component';
 import { PrettycolorjsonPipe } from './prettycolorjson.pipe';
-
-const appRoutes: Routes = [
-  { path: 'questions/:p1', component: QuestionComponentComponent },
-  { path: '', component: HomepageComponent },
-  { path: 'sheetadmin', component: SheetMakerComponent }
-];
+import { LoginPageComponent } from './login-page/login-page.component';
+import { AuthGuard } from './guards/auth.guard';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,18 +22,17 @@ const appRoutes: Routes = [
     HeaderComponent,
     HomepageComponent,
     SheetMakerComponent,
-    PrettycolorjsonPipe
+    PrettycolorjsonPipe,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     MatCardModule,
-    RouterModule.forRoot(appRoutes,
-      {enableTracing: false}
-      )
+    FormsModule, ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

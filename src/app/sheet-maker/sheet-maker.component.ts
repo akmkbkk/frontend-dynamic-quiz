@@ -38,7 +38,7 @@ export class SheetMakerComponent implements OnInit {
       answers:this.optionsJson,
       correctOptionKey:"",
       correctAnsExplain:"",
-      marks:""
+      marks:null
     }
 
     this.errorMessage = "";
@@ -120,7 +120,7 @@ export class SheetMakerComponent implements OnInit {
   }
 
   onFocusOutMarks(value:string){
-    this.questionJson.marks = value;
+    this.questionJson.marks = Number(value);
     this.checkConditions();
     this.changedAttribute="marks";
   }
@@ -144,7 +144,7 @@ export class SheetMakerComponent implements OnInit {
       answers:this.optionsJson,
       correctOptionKey:"",
       correctAnsExplain:"",
-      marks:""
+      marks:null
     };
     this.checkConditions();
     this.downloadFileLengthOkay = false;
@@ -177,7 +177,7 @@ export class SheetMakerComponent implements OnInit {
   }
 
   onInputDownloadFileName(downloadFileName:string){
-    if(downloadFileName.length>4){
+    if(downloadFileName.length>4 && downloadFileName.indexOf(".")==-1){
       this.downloadFileLengthOkay = true;
     }
   }
