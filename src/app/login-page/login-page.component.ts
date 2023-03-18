@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Login } from '../interfaces/login';
 import { AuthService } from '../services/auth.service' ;
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
+import { AuthGuard } from '../guards/auth.guard';
 
 @Component({
   selector: 'app-login-page',
@@ -19,7 +20,7 @@ export class LoginPageComponent implements OnInit {
   returnUrl:string;
   hideLogoutButtonOnHeader:boolean = true;
 
-  constructor(private formBuilder: FormBuilder,private router:Router,private authService:AuthService) { 
+  constructor(private formBuilder: FormBuilder,private router:Router,private authService:AuthService,private authGuard:AuthGuard) { 
 
   }
 
@@ -30,8 +31,14 @@ export class LoginPageComponent implements OnInit {
       password: ['', Validators.required]  
    });
 
-   this.returnUrl = '/home';  
-   this.authService.logout();  
+   if(this.authGuard.isLoggedIn()){
+    this.router.navigate(['/home']); 
+   }else{
+    this.returnUrl = '/home';  
+    this.authService.logout();  
+   }
+
+
 
   }
 
