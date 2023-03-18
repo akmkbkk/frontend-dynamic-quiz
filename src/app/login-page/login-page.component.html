@@ -1,3 +1,4 @@
+<app-header></app-header>
 <section class="vh-100">
   <div class="container-fluid h-custom">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -22,6 +23,7 @@
             <input formControlName="password" type="password" id="form3Example4" class="form-control form-control-lg"
               placeholder="Enter password" />
           </div>
+          <span style="color:red" *ngIf="errorMessage">{{errorMessage}}</span>
           
 
           <div class="text-center text-lg-start mt-4 pt-2">

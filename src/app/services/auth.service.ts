@@ -10,6 +10,9 @@ export class AuthService {
 
   logout() :void {    
     localStorage.setItem('isLoggedIn','false');    
-    localStorage.removeItem('token');    
+    localStorage.removeItem('token');  
+    localStorage.removeItem('fname');
+    localStorage.removeItem('lname');
+    localStorage.removeItem('role');  
   }  
 }

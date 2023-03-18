@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHandler, HttpHeaders } from "@angular/common/http";
 
 import {  throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
@@ -37,5 +37,13 @@ export class DataService {
   public sendIndexRequest(endPoint:string){
     return this.httpClient.get(this.REST_API_SERVER+
       endPoint).pipe(catchError(this.handleError));
+  }
+
+  public doLoginCheck(endPoint:string, userid:string,password:string){
+    const headers = new HttpHeaders;
+    headers.append('Access-Control-Allow-Origin', '*');
+    return this.httpClient.post(this.REST_API_SERVER+
+      endPoint,{userid:userid,password:password},{ headers: headers })
+      .pipe(catchError(this.handleError));
   }
 }
